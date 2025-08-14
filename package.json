@@ -1,6 +1,6 @@
 {
   "name": "claude-code-mirror-docs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Adrien Valcke <adrienvalcke@icloud.com> (https://github.com/adrienv1520)",
   "description": "An automated and versioned mirror of the official Anthropic Claude Code documentation. Fetched via GitHub Actions.",
   "type": "module",

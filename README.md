@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Code](https://docs.anthropic.com/en/docs/claude-code/) documentation. It is updated automatically._
 
-**Last updated:** Thu, 14 Aug 2025 07:56:03 GMT
+**Last updated:** Thu, 14 Aug 2025 18:34:05 GMT
 
 ---
 
@@ -58,4 +58,8 @@ _This repository is a mirror of the official [Claude Code](https://docs.anthropi
 ## Resources
 
 - [Legal and compliance](./docs/resources/legal-and-compliance.md)
+
+## Others
+
+- [output-styles](./docs/others/output-styles.md)
 
