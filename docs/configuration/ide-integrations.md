@@ -91,4 +91,4 @@ IDE integrations work with Claude Code's configuration system:
   installed in the remote host and not locally on the client
 
 For additional help, refer to our
-[troubleshooting guide](/en/docs/claude-code/troubleshooting).
+[troubleshooting guide](../build-with-claude-code/troubleshooting.md).

@@ -67,6 +67,6 @@ Ensure these URLs are allowlisted in your proxy configuration and firewall rules
 
 ## Additional resources
 
-* [Claude Code settings](/en/docs/claude-code/settings)
-* [Environment variables reference](/en/docs/claude-code/settings#environment-variables)
-* [Troubleshooting guide](/en/docs/claude-code/troubleshooting)
+* [Claude Code settings](../configuration/settings.md)
+* [Environment variables reference](../configuration/settings.md#environment-variables)
+* [Troubleshooting guide](../build-with-claude-code/troubleshooting.md)

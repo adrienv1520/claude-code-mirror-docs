@@ -21,7 +21,7 @@
 | `/mcp`                    | Manage MCP server connections and OAuth authentication                         |
 | `/memory`                 | Edit CLAUDE.md memory files                                                    |
 | `/model`                  | Select or change the AI model                                                  |
-| `/permissions`            | View or update [permissions](/en/docs/claude-code/iam#configuring-permissions) |
+| `/permissions`            | View or update [permissions](../administration/iam.md#configuring-permissions) |
 | `/pr_comments`            | View pull request comments                                                     |
 | `/review`                 | Request code review                                                            |
 | `/status`                 | View account and system statuses                                               |
@@ -129,7 +129,7 @@ Based on the above changes, create a single git commit.
 
 #### File references
 
-Include file contents in commands using the `@` prefix to [reference files](/en/docs/claude-code/common-workflows#reference-files-and-directories).
+Include file contents in commands using the `@` prefix to [reference files](../getting-started/common-workflows.md#reference-files-and-directories).
 
 For example:
 
@@ -145,7 +145,7 @@ Compare @src/old-version.js with @src/new-version.js
 
 #### Thinking mode
 
-Slash commands can trigger extended thinking by including [extended thinking keywords](/en/docs/claude-code/common-workflows#use-extended-thinking).
+Slash commands can trigger extended thinking by including [extended thinking keywords](../getting-started/common-workflows.md#use-extended-thinking).
 
 ### Frontmatter
 
@@ -224,7 +224,7 @@ Use the `/mcp` command to:
 
 ## See also
 
-* [Interactive mode](/en/docs/claude-code/interactive-mode) - Shortcuts, input modes, and interactive features
-* [CLI reference](/en/docs/claude-code/cli-reference) - Command-line flags and options
-* [Settings](/en/docs/claude-code/settings) - Configuration options
-* [Memory management](/en/docs/claude-code/memory) - Managing Claude's memory across sessions
+* [Interactive mode](interactive-mode.md) - Shortcuts, input modes, and interactive features
+* [CLI reference](cli-reference.md) - Command-line flags and options
+* [Settings](../configuration/settings.md) - Configuration options
+* [Memory management](../configuration/memory.md) - Managing Claude's memory across sessions

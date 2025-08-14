@@ -58,7 +58,7 @@ jobs:
         if: steps.git_status.outputs.has_changes == 'true'
         run: |
           NEW_VERSION="${{ steps.version.outputs.version_number }}"
-          CHANGELOG_HEADER="## v${NEW_VERSION} - $(date +'%d-%m-%Y')"
+          CHANGELOG_HEADER="## 🤖 v${NEW_VERSION} - $(date +'%d-%m-%Y')"
           echo -e "$CHANGELOG_HEADER" > new_entry.tmp
           GIT_CHANGES=$(git status --porcelain docs/ README.md)
           echo -e "\n- File Changes:\n\`\`\`\n$GIT_CHANGES\n\`\`\`" >> new_entry.tmp

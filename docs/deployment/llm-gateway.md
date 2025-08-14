@@ -140,6 +140,6 @@ For more detailed information, refer to the [LiteLLM documentation](https://docs
 ## Additional resources
 
 * [LiteLLM documentation](https://docs.litellm.ai/)
-* [Claude Code settings](/en/docs/claude-code/settings)
-* [Corporate proxy setup](/en/docs/claude-code/corporate-proxy)
-* [Third-party integrations overview](/en/docs/claude-code/third-party-integrations)
+* [Claude Code settings](../configuration/settings.md)
+* [Corporate proxy setup](corporate-proxy.md)
+* [Third-party integrations overview](third-party-integrations.md)

@@ -84,5 +84,5 @@ Tool acceptance rates and code metrics help you:
 
 ## Related resources
 
-* [Monitoring usage with OpenTelemetry](/en/docs/claude-code/monitoring-usage) for custom metrics and alerting
-* [Identity and access management](/en/docs/claude-code/iam) for role configuration
+* [Monitoring usage with OpenTelemetry](monitoring-usage.md) for custom metrics and alerting
+* [Identity and access management](iam.md) for role configuration

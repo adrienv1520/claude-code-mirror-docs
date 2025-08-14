@@ -17,23 +17,23 @@ cd your-awesome-project
 claude
 ```
 
-That's it! You're ready to start coding with Claude. [Continue with Quickstart (5 mins) →](/en/docs/claude-code/quickstart)
+That's it! You're ready to start coding with Claude. [Continue with Quickstart (5 mins) →](quickstart.md)
 
-(Got specific setup needs or hit issues? See [advanced setup](/en/docs/claude-code/setup) or [troubleshooting](/en/docs/claude-code/troubleshooting).)
+(Got specific setup needs or hit issues? See [advanced setup](../administration/setup.md) or [troubleshooting](../build-with-claude-code/troubleshooting.md).)
 
 ## What Claude Code does for you
 
 * **Build features from descriptions**: Tell Claude what you want to build in plain English. It will make a plan, write the code, and ensure it works.
 * **Debug and fix issues**: Describe a bug or paste an error message. Claude Code will analyze your codebase, identify the problem, and implement a fix.
-* **Navigate any codebase**: Ask anything about your team's codebase, and get a thoughtful answer back. Claude Code maintains awareness of your entire project structure, can find up-to-date information from the web, and with [MCP](/en/docs/claude-code/mcp) can pull from external datasources like Google Drive, Figma, and Slack.
+* **Navigate any codebase**: Ask anything about your team's codebase, and get a thoughtful answer back. Claude Code maintains awareness of your entire project structure, can find up-to-date information from the web, and with [MCP](../build-with-claude-code/mcp.md) can pull from external datasources like Google Drive, Figma, and Slack.
 * **Automate tedious tasks**: Fix fiddly lint issues, resolve merge conflicts, and write release notes. Do all this in a single command from your developer machines, or automatically in CI.
 
 ## Why developers love Claude Code
 
 * **Works in your terminal**: Not another chat window. Not another IDE. Claude Code meets you where you already work, with the tools you already love.
-* **Takes action**: Claude Code can directly edit files, run commands, and create commits. Need more? [MCP](/en/docs/claude-code/mcp) lets Claude read your design docs in Google Drive, update your tickets in Jira, or use *your* custom developer tooling.
+* **Takes action**: Claude Code can directly edit files, run commands, and create commits. Need more? [MCP](../build-with-claude-code/mcp.md) lets Claude read your design docs in Google Drive, update your tickets in Jira, or use *your* custom developer tooling.
 * **Unix philosophy**: Claude Code is composable and scriptable. `tail -f app.log | claude -p "Slack me if you see any anomalies appear in this log stream"` *works*. Your CI can run `claude -p "If there are new text strings, translate them into French and raise a PR for @lang-fr-team to review"`.
-* **Enterprise-ready**: Use Anthropic's API, or host on AWS or GCP. Enterprise-grade [security](/en/docs/claude-code/security), [privacy](/en/docs/claude-code/data-usage), and [compliance](https://trust.anthropic.com/) is built-in.
+* **Enterprise-ready**: Use Anthropic's API, or host on AWS or GCP. Enterprise-grade [security](../administration/security.md), [privacy](../administration/data-usage.md), and [compliance](https://trust.anthropic.com/) is built-in.
 
 ## Next steps
 

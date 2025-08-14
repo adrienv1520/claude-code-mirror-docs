@@ -111,7 +111,7 @@ the subagent should follow.
 
 ### Available tools
 
-Subagents can be granted access to any of Claude Code's internal tools. See the [tools documentation](/en/docs/claude-code/settings#tools-available-to-claude) for a complete list of available tools.
+Subagents can be granted access to any of Claude Code's internal tools. See the [tools documentation](../configuration/settings.md#tools-available-to-claude) for a complete list of available tools.
 
 <Tip>
   **Recommended:** Use the `/agents` command to modify tool access - it provides an interactive interface that lists all available tools, including any connected MCP server tools, making it easier to select the ones you need.
@@ -324,6 +324,6 @@ Claude Code intelligently selects subagents based on context. Make your `descrip
 
 ## Related documentation
 
-* [Slash commands](/en/docs/claude-code/slash-commands) - Learn about other built-in commands
-* [Settings](/en/docs/claude-code/settings) - Configure Claude Code behavior
-* [Hooks](/en/docs/claude-code/hooks) - Automate workflows with event handlers
+* [Slash commands](../reference/slash-commands.md) - Learn about other built-in commands
+* [Settings](../configuration/settings.md) - Configure Claude Code behavior
+* [Hooks](../reference/hooks.md) - Automate workflows with event handlers

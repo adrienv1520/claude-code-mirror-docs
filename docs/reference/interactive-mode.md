@@ -28,7 +28,7 @@
 | Shortcut     | Description                        | Notes                                                     |
 | :----------- | :--------------------------------- | :-------------------------------------------------------- |
 | `#` at start | Memory shortcut - add to CLAUDE.md | Prompts for file selection                                |
-| `/` at start | Slash command                      | See [slash commands](/en/docs/claude-code/slash-commands) |
+| `/` at start | Slash command                      | See [slash commands](slash-commands.md) |
 
 ## Vim mode
 
@@ -89,7 +89,7 @@ Claude Code maintains command history for the current session:
 
 ## See also
 
-* [Slash commands](/en/docs/claude-code/slash-commands) - Interactive session commands
-* [CLI reference](/en/docs/claude-code/cli-reference) - Command-line flags and options
-* [Settings](/en/docs/claude-code/settings) - Configuration options
-* [Memory management](/en/docs/claude-code/memory) - Managing CLAUDE.md files
+* [Slash commands](slash-commands.md) - Interactive session commands
+* [CLI reference](cli-reference.md) - Command-line flags and options
+* [Settings](../configuration/settings.md) - Configuration options
+* [Memory management](../configuration/memory.md) - Managing CLAUDE.md files

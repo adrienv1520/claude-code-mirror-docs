@@ -58,4 +58,4 @@ By default, we disable all non-essential traffic (including error reporting, tel
 | **Sentry (Errors)**                | Default on.<br />`DISABLE_ERROR_REPORTING=1` to disable. | Default off.<br />`CLAUDE_CODE_USE_VERTEX` must be 1. | Default off.<br />`CLAUDE_CODE_USE_BEDROCK` must be 1. |
 | **Anthropic API (`/bug` reports)** | Default on.<br />`DISABLE_BUG_COMMAND=1` to disable.     | Default off.<br />`CLAUDE_CODE_USE_VERTEX` must be 1. | Default off.<br />`CLAUDE_CODE_USE_BEDROCK` must be 1. |
 
-All environment variables can be checked into `settings.json` ([read more](/en/docs/claude-code/settings)).
+All environment variables can be checked into `settings.json` ([read more](../configuration/settings.md)).

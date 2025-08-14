@@ -14,7 +14,7 @@ Claude Code uses strict read-only permissions by default. When additional action
 
 We designed Claude Code to be transparent and secure. For example, we require approval for bash commands before executing them, giving you direct control. This approach enables users and organizations to configure permissions directly.
 
-For detailed permission configuration, see [Identity and Access Management](/en/docs/claude-code/iam).
+For detailed permission configuration, see [Identity and Access Management](iam.md).
 
 ### Built-in protections
 
@@ -57,7 +57,7 @@ For full details, please review our [Commercial Terms of Service](https://www.an
 * **Command injection detection**: Suspicious bash commands require manual approval even if previously allowlisted
 * **Fail-closed matching**: Unmatched commands default to requiring manual approval
 * **Natural language descriptions**: Complex bash commands include explanations for user understanding
-* **Secure credential storage**: API keys and tokens are encrypted. See [Credential Management](/en/docs/claude-code/iam#credential-management)
+* **Secure credential storage**: API keys and tokens are encrypted. See [Credential Management](iam.md#credential-management)
 
 **Best practices for working with untrusted content**:
 
@@ -85,15 +85,15 @@ We encourage either writing your own MCP servers or using MCP servers from provi
 
 * Review all suggested changes before approval
 * Use project-specific permission settings for sensitive repositories
-* Consider using [devcontainers](/en/docs/claude-code/devcontainer) for additional isolation
+* Consider using [devcontainers](../deployment/devcontainer.md) for additional isolation
 * Regularly audit your permission settings with `/permissions`
 
 ### Team security
 
-* Use [enterprise managed policies](/en/docs/claude-code/iam#enterprise-managed-policy-settings) to enforce organizational standards
+* Use [enterprise managed policies](iam.md#enterprise-managed-policy-settings) to enforce organizational standards
 * Share approved permission configurations through version control
 * Train team members on security best practices
-* Monitor Claude Code usage through [OpenTelemetry metrics](/en/docs/claude-code/monitoring-usage)
+* Monitor Claude Code usage through [OpenTelemetry metrics](monitoring-usage.md)
 
 ### Reporting security issues
 
@@ -106,7 +106,7 @@ If you discover a security vulnerability in Claude Code:
 
 ## Related resources
 
-* [Identity and Access Management](/en/docs/claude-code/iam) - Configure permissions and access controls
-* [Monitoring usage](/en/docs/claude-code/monitoring-usage) - Track and audit Claude Code activity
-* [Development containers](/en/docs/claude-code/devcontainer) - Secure, isolated environments
+* [Identity and Access Management](iam.md) - Configure permissions and access controls
+* [Monitoring usage](monitoring-usage.md) - Track and audit Claude Code activity
+* [Development containers](../deployment/devcontainer.md) - Secure, isolated environments
 * [Anthropic Trust Center](https://trust.anthropic.com) - Security certifications and compliance

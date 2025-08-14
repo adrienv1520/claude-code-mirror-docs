@@ -59,7 +59,7 @@ You'll see the Claude Code prompt inside a new interactive session:
 ```
 
 <Tip>
-  Your credentials are securely stored on your system. Learn more in [Credential Management](/en/docs/claude-code/iam#credential-management).
+  Your credentials are securely stored on your system. Learn more in [Credential Management](../administration/iam.md#credential-management).
 </Tip>
 
 ## Step 3: Ask your first question
@@ -218,7 +218,7 @@ Here are the most important commands for daily use:
 | `/help`             | Show available commands           | `> /help`                           |
 | `exit` or Ctrl+C    | Exit Claude Code                  | `> exit`                            |
 
-See the [CLI reference](/en/docs/claude-code/cli-reference) for a complete list of commands.
+See the [CLI reference](../reference/cli-reference.md) for a complete list of commands.
 
 ## Pro tips for beginners
 

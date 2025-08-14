@@ -17,26 +17,23 @@ const ROOT_README_PATH = 'README.md';
 const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
 /**
- * Cleans the output directory and the root README.md file.
+ * Removes previously generated files and directories to ensure a clean build.
  */
 async function cleanPreviousBuild() {
   console.log('🧼 1. Cleaning up previous build...');
 
-  // Remove the 'docs' directory
   await fs.rm(DOCS_DIR, { recursive: true, force: true });
   console.log(`   -> Directory '${DOCS_DIR}' removed.`);
 
-  // Remove the root README.md
   await fs.rm(ROOT_README_PATH, { force: true });
   console.log(`   -> File '${ROOT_README_PATH}' removed.`);
 
-  // Recreate the empty 'docs' directory
   await fs.mkdir(DOCS_DIR, { recursive: true });
   console.log('   Cleanup complete.');
 }
 
 /**
- * Step 1: Fetch the complete list of URLs from the sitemap.
+ * Fetches all URLs from the site's sitemap and filters for the target documentation.
  */
 async function fetchAllUrlsFromSitemap() {
   console.log('🗺️ 2. Fetching all URLs from the sitemap...');
@@ -50,13 +47,15 @@ async function fetchAllUrlsFromSitemap() {
 }
 
 /**
- * Step 2: Scrape the navigation page to extract its structure.
+ * Scrapes the navigation page to extract its structure and create a
+ * slug-to-category map for link rewriting.
  */
 async function fetchNavigationStructure() {
-  console.log('⛵️ 3. Analyzing navigation structure...');
+  console.log('⛵ 3. Analyzing navigation structure and creating link map...');
   const response = await axios.get(NAV_PAGE_URL);
   const $ = cheerio.load(response.data);
   const structure = [];
+  const slugToCategoryMap = new Map();
 
   $('#navigation-items > div').each((i, div) => {
     const categoryTitle = $(div).find('h5#sidebar-title').text().trim();
@@ -75,39 +74,58 @@ async function fetchNavigationStructure() {
       if (href) {
         const fileSlug = path.basename(href);
         category.files.push({ slug: fileSlug, title: fileTitle, href: `${BASE_URL}${href}` });
+        slugToCategoryMap.set(fileSlug, categorySlug);
       }
     });
     structure.push(category);
   });
 
   console.log(`   Structure extracted with ${structure.length} categories.`);
-  return { structure };
+  return { structure, slugToCategoryMap };
 }
 
 /**
- * Step 3: Download and save the documents into the correct directory structure.
+ * Rewrites absolute documentation links within the downloaded Markdown content
+ * to relative local file links.
  */
-async function downloadAndSaveDocs(allUrls, navStructure) {
-  console.log('📖 4. Downloading and organizing documentation files...');
+function rewriteLocalLinks(content, currentCategorySlug, slugToCategoryMap, filePath) {
+  // This regex finds Markdown links pointing to the Claude Code docs.
+  const linkRegex = /\]\(((\/en\/docs\/claude-code\/([^"#)]+))(#?[^")]*)?)\)/g;
+
+  return content.replaceAll(linkRegex, (match, fullUrl, fullPath, targetSlug, fragment) => {
+    const targetCategorySlug = slugToCategoryMap.get(targetSlug);
+    const safeFragment = fragment || '';
+
+    if (!targetCategorySlug) {
+      console.warn(`   ! Could not find category for link target: '${targetSlug}' in file '${filePath}'. Skipping rewrite.`);
+      return match;
+    }
+
+    const fromDir = path.join(DOCS_DIR, currentCategorySlug);
+    const toFile = path.join(DOCS_DIR, targetCategorySlug, `${targetSlug}.md`);
+    const relativePath = path.relative(fromDir, toFile);
+
+    // Reconstruct the Markdown link with the new relative path.
+    return `](${relativePath}${safeFragment})`;
+  });
+}
+
+/**
+ * Downloads each document, rewrites its internal links to be relative,
+ * and saves it to the correct directory based on the site structure.
+ */
+async function downloadAndSaveDocs(allUrls, navStructure, slugToCategoryMap) {
+  console.log('📖 4. Downloading, rewriting, and saving documentation...');
   const downloadPromises = [];
   const otherFiles = [];
 
   for (const url of allUrls) {
     const urlMdFile = `${url}.md`;
-    let categorySlug = null;
-    for (const category of navStructure) {
-      if (category.files.some((file) => file.href === url)) {
-        categorySlug = category.slug;
-        break;
-      }
-    }
-
     const fileSlug = path.basename(url);
-    if (!categorySlug) {
-      categorySlug = 'others'; // Category for uncategorized files
-      if (!otherFiles.some((f) => f.slug === fileSlug)) {
-        otherFiles.push({ slug: fileSlug, title: fileSlug });
-      }
+    const categorySlug = slugToCategoryMap.get(fileSlug) || 'others';
+
+    if (categorySlug === 'others' && !otherFiles.some((f) => f.slug === fileSlug)) {
+      otherFiles.push({ slug: fileSlug, title: fileSlug });
     }
 
     const dirPath = path.join(DOCS_DIR, categorySlug);
@@ -118,19 +136,24 @@ async function downloadAndSaveDocs(allUrls, navStructure) {
 
     downloadPromises.push(
       axios.get(urlMdFile, { responseType: 'text' })
-        .then((response) => fs.writeFile(filePath, response.data, 'utf-8'))
-        .then(() => console.log(`   -> ${filePath}`))
-        .catch((err) => console.error(`   ! Failed to download ${url}: ${err.message}`)),
+        .then((response) => {
+          console.log(`   -> Processing ${filePath}`);
+          // eslint-disable-next-line max-len
+          const rewrittenContent = rewriteLocalLinks(response.data, categorySlug, slugToCategoryMap, filePath);
+          return fs.writeFile(filePath, rewrittenContent, 'utf-8');
+        })
+        .catch((err) => console.error(`   ! Failed to process ${urlMdFile}: ${err.message}`)),
     );
   }
 
   await Promise.all(downloadPromises);
-  console.log('   Download complete.');
+  console.log('   File processing complete.');
   return { otherFiles };
 }
 
 /**
- * Step 4: Generate a README.md file at the project root with a table of contents.
+ * Generates a root README.md file with a complete table of contents
+ * linking to all the mirrored documentation files.
  */
 async function generateReadme(navStructure, otherFiles) {
   console.log('👓 5. Generating root README.md...');
@@ -159,13 +182,13 @@ async function generateReadme(navStructure, otherFiles) {
 }
 
 /**
- * Main function to run the script.
+ * The main function that orchestrates the entire mirroring process.
  */
 async function main() {
   await cleanPreviousBuild();
   const allUrls = await fetchAllUrlsFromSitemap();
-  const { structure } = await fetchNavigationStructure();
-  const { otherFiles } = await downloadAndSaveDocs(allUrls, structure);
+  const { structure, slugToCategoryMap } = await fetchNavigationStructure();
+  const { otherFiles } = await downloadAndSaveDocs(allUrls, structure, slugToCategoryMap);
   await generateReadme(structure, otherFiles);
   console.log('\n✅ Update process completed successfully!');
 }

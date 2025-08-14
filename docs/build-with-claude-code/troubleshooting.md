@@ -98,7 +98,7 @@ claude doctor # Check installation health
 ### Repeated permission prompts
 
 If you find yourself repeatedly approving the same commands, you can allow specific tools
-to run without approval using the `/permissions` command. See [Permissions docs](/en/docs/claude-code/iam#configuring-permissions).
+to run without approval using the `/permissions` command. See [Permissions docs](../administration/iam.md#configuring-permissions).
 
 ### Authentication issues
 

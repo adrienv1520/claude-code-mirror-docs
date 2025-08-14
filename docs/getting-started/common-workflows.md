@@ -214,7 +214,7 @@ Suppose you want to use specialized AI subagents to handle specific tasks more e
   * Create project-specific subagents in `.claude/agents/` for team sharing
   * Use descriptive `description` fields to enable automatic delegation
   * Limit tool access to what each subagent actually needs
-  * Check the [subagents documentation](/en/docs/claude-code/sub-agents) for detailed examples
+  * Check the [subagents documentation](../build-with-claude-code/sub-agents.md) for detailed examples
 </Tip>
 
 ***
@@ -422,7 +422,7 @@ Use @ to quickly include files or directories without waiting for Claude to read
     > Show me the data from @github:repos/owner/repo/issues
     ```
 
-    This fetches data from connected MCP servers using the format @server:resource. See [MCP resources](/en/docs/claude-code/mcp#use-mcp-resources) for details.
+    This fetches data from connected MCP servers using the format @server:resource. See [MCP resources](../build-with-claude-code/mcp.md#use-mcp-resources) for details.
   </Step>
 </Steps>
 
@@ -722,7 +722,7 @@ Suppose you need Claude's output in a specific format, especially when integrati
 
 Claude Code supports custom slash commands that you can create to quickly execute specific prompts or tasks.
 
-For more details, see the [Slash commands](/en/docs/claude-code/slash-commands) reference page.
+For more details, see the [Slash commands](../reference/slash-commands.md) reference page.
 
 ### Create project-specific commands
 

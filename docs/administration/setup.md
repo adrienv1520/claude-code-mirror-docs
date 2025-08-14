@@ -25,7 +25,7 @@ npm install -g @anthropic-ai/claude-code
 
 <Warning>
   Do NOT use `sudo npm install -g` as this can lead to permission issues and security risks.
-  If you encounter permission errors, see [configure Claude Code](/en/docs/claude-code/troubleshooting#linux-permission-issues) for recommended solutions.
+  If you encounter permission errors, see [configure Claude Code](../build-with-claude-code/troubleshooting.md#linux-permission-issues) for recommended solutions.
 </Warning>
 
 <Note>
@@ -44,10 +44,10 @@ Claude Code offers the following authentication options:
 
 1. **Anthropic Console**: The default option. Connect through the Anthropic Console and complete the OAuth process. Requires active billing at [console.anthropic.com](https://console.anthropic.com).
 2. **Claude App (with Pro or Max plan)**: Subscribe to Claude's [Pro or Max plan](https://www.anthropic.com/pricing) for a unified subscription that includes both Claude Code and the web interface. Get more value at the same price point while managing your account in one place. Log in with your Claude.ai account. During launch, choose the option that matches your subscription type.
-3. **Enterprise platforms**: Configure Claude Code to use [Amazon Bedrock or Google Vertex AI](/en/docs/claude-code/third-party-integrations) for enterprise deployments with your existing cloud infrastructure.
+3. **Enterprise platforms**: Configure Claude Code to use [Amazon Bedrock or Google Vertex AI](../deployment/third-party-integrations.md) for enterprise deployments with your existing cloud infrastructure.
 
 <Note>
-  Claude Code securely stores your credentials. See [Credential Management](/en/docs/claude-code/iam#credential-management) for details.
+  Claude Code securely stores your credentials. See [Credential Management](iam.md#credential-management) for details.
 </Note>
 
 ## Windows setup
@@ -68,7 +68,7 @@ Claude Code offers the following authentication options:
 
 Claude Code offers multiple installation methods to suit different environments.
 
-If you encounter any issues during installation, consult the [troubleshooting guide](/en/docs/claude-code/troubleshooting#linux-permission-issues).
+If you encounter any issues during installation, consult the [troubleshooting guide](../build-with-claude-code/troubleshooting.md#linux-permission-issues).
 
 <Tip>
   Run `claude doctor` after installation to check your installation type and version.
@@ -128,7 +128,7 @@ The native Claude Code installer is supported on macOS, Linux, and Windows.
 
 By default, Claude Code uses Anthropic's API.
 
-For details on running Claude Code on AWS or GCP, see [third-party integrations](/en/docs/claude-code/third-party-integrations).
+For details on running Claude Code on AWS or GCP, see [third-party integrations](../deployment/third-party-integrations.md).
 
 ## Update Claude Code
 

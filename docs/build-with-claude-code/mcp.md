@@ -641,7 +641,7 @@ If a required environment variable is not set and has no default value, Claude C
 
   <Tip>
   Tips:
-  - Also see the [GitHub Actions](/en/docs/claude-code/github-actions) integration to run this automatically. 
+  - Also see the [GitHub Actions](github-actions.md) integration to run this automatically. 
   - If you have the GitHub CLI installed, you might prefer using it directly with Claude Code's bash tool instead of the MCP server for some operations.
   </Tip>
 

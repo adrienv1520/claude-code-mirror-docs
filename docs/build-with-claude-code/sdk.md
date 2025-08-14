@@ -236,7 +236,7 @@ The Claude Code SDK allows you to interface with Claude Code in non-interactive 
     | `--mcp-config`             | Load MCP servers from a JSON file                                                                      | `claude --mcp-config servers.json`                                                                                        |
     | `--permission-prompt-tool` | MCP tool for handling permission prompts (only with `--print`)                                         | `claude --permission-prompt-tool mcp__auth__prompt`                                                                       |
 
-    For a complete list of CLI options and features, see the [CLI reference](/en/docs/claude-code/cli-reference) documentation.
+    For a complete list of CLI options and features, see the [CLI reference](../reference/cli-reference.md) documentation.
   </Tab>
 
   <Tab title="TypeScript">
@@ -273,7 +273,7 @@ The Claude Code SDK allows you to interface with Claude Code in non-interactive 
 
     **Configuration**
 
-    The TypeScript SDK accepts all arguments supported by the [command line](/en/docs/claude-code/cli-reference), as well as the following additional options:
+    The TypeScript SDK accepts all arguments supported by the [command line](../reference/cli-reference.md), as well as the following additional options:
 
     | Argument                     | Description                         | Default                                                                              |
     | :--------------------------- | :---------------------------------- | :----------------------------------------------------------------------------------- |
@@ -386,7 +386,7 @@ The Claude Code SDK allows you to interface with Claude Code in non-interactive 
 
     **Configuration**
 
-    As the Python SDK accepts all arguments supported by the [command line](/en/docs/claude-code/cli-reference) through the `ClaudeCodeOptions` class.
+    As the Python SDK accepts all arguments supported by the [command line](../reference/cli-reference.md) through the `ClaudeCodeOptions` class.
   </Tab>
 </Tabs>
 
@@ -403,7 +403,7 @@ The SDK also supports authentication via third-party API providers:
 * **Amazon Bedrock**: Set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
 * **Google Vertex AI**: Set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
 
-For detailed configuration instructions for third-party providers, see the [Amazon Bedrock](/en/docs/claude-code/amazon-bedrock) and [Google Vertex AI](/en/docs/claude-code/google-vertex-ai) documentation.
+For detailed configuration instructions for third-party providers, see the [Amazon Bedrock](../deployment/amazon-bedrock.md) and [Google Vertex AI](../deployment/google-vertex-ai.md) documentation.
 
 ### Multi-turn conversations
 
@@ -538,7 +538,7 @@ Plan Mode allows Claude to analyze code without making modifications, useful for
 </Tabs>
 
 <Note>
-  Plan Mode restricts editing, file creation, and command execution. See [permission modes](/en/docs/claude-code/iam#permission-modes) for details.
+  Plan Mode restricts editing, file creation, and command execution. See [permission modes](../administration/iam.md#permission-modes) for details.
 </Note>
 
 ### Custom system prompts
@@ -764,7 +764,7 @@ The Model Context Protocol (MCP) lets you give your agents custom tools and capa
 
 Optionally, use `--permission-prompt-tool` to pass in an MCP tool that we will use to check whether or not the user grants the model permissions to invoke a given tool. When the model invokes a tool the following happens:
 
-1. We first check permission settings: all [settings.json files](/en/docs/claude-code/settings), as well as `--allowedTools` and `--disallowedTools` passed into the SDK; if one of these allows or denies the tool call, we proceed with the tool call
+1. We first check permission settings: all [settings.json files](../configuration/settings.md), as well as `--allowedTools` and `--disallowedTools` passed into the SDK; if one of these allows or denies the tool call, we proceed with the tool call
 2. Otherwise, we invoke the MCP tool you provided in `--permission-prompt-tool`
 
 The `--permission-prompt-tool` MCP tool is passed the tool name and input, and must return a JSON-stringified payload with the result. The payload must be one of:
@@ -1634,6 +1634,6 @@ async def stream_print(client, prompt):
 
 ## Related resources
 
-* [CLI usage and controls](/en/docs/claude-code/cli-reference) - Complete CLI documentation
-* [GitHub Actions integration](/en/docs/claude-code/github-actions) - Automate your GitHub workflow with Claude
-* [Common workflows](/en/docs/claude-code/common-workflows) - Step-by-step guides for common use cases
+* [CLI usage and controls](../reference/cli-reference.md) - Complete CLI documentation
+* [GitHub Actions integration](github-actions.md) - Automate your GitHub workflow with Claude
+* [Common workflows](../getting-started/common-workflows.md) - Step-by-step guides for common use cases
