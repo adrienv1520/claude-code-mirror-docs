@@ -1,5 +1,15 @@
 # Changelog
 
+## 🤖 v1.0.3 - 14-08-2025
+
+- File Changes:
+```
+ M README.md
+ D docs/others/output-styles.md
+?? docs/build-with-claude-code/output-styles.md
+```
+
+
 ## 🤖 v1.0.2 - 14-08-2025
 
 - File Changes:
