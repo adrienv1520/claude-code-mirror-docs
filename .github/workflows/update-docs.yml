@@ -1,0 +1,84 @@
+name: Update, Version, and Publish Docs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */3 * * *' # runs every 3 hours
+
+jobs:
+  update-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run docs update script
+        run: node scripts/update-docs.js
+
+      - name: Check for file changes
+        id: git_status
+        run: |
+          if [ -z "$(git status --porcelain docs/)" ]; then
+            echo "No changes detected in the documentation."
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected. Starting the versioning process."
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Configure Git user
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions-bot@github.com"
+
+      - name: Bump package version
+        if: steps.git_status.outputs.has_changes == 'true'
+        id: version
+        run: |
+          npm version patch --no-git-tag-version --commit-hooks false
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "version_number=${NEW_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Generate Changelog
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          NEW_VERSION="${{ steps.version.outputs.version_number }}"
+          CHANGELOG_HEADER="## v${NEW_VERSION} - $(date +'%d-%m-%Y')"
+          echo -e "$CHANGELOG_HEADER" > new_entry.tmp
+          GIT_CHANGES=$(git status --porcelain docs/ README.md)
+          echo -e "\n- File Changes:\n\`\`\`\n$GIT_CHANGES\n\`\`\`" >> new_entry.tmp
+          tail -n +2 CHANGELOG.md 2>/dev/null > old_body.tmp
+          {
+            echo "# Changelog";
+            echo "";
+            cat new_entry.tmp;
+            echo "";
+            cat old_body.tmp;
+          } > CHANGELOG.md
+          rm new_entry.tmp old_body.tmp
+
+      - name: Commit, Tag, and Push
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          git add docs/ README.md CHANGELOG.md package.json package-lock.json
+
+          git commit -m "docs: release v${{ steps.version.outputs.version_number }}"
+          git tag "v${{ steps.version.outputs.version_number }}"
+
+          git push
+          git push --tags
