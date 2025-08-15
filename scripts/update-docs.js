@@ -12,6 +12,7 @@ const URL_PREFIX = 'https://docs.anthropic.com/en/docs/claude-code/';
 const BASE_URL = 'https://docs.anthropic.com';
 const DOCS_DIR = 'docs';
 const ROOT_README_PATH = 'README.md';
+const TELEGRAM_PUBLIC_CHANNEL_URL = 'https://t.me/+KFW99jUnwOA1ODA8';
 
 // --- Utility Functions ---
 const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -159,7 +160,16 @@ async function generateReadme(navStructure, otherFiles) {
   console.log('👓 5. Generating root README.md...');
   let readmeContent = '# Claude Code Mirror Docs\n\n';
   readmeContent += '_This repository is a mirror of the official [Claude Code](https://docs.anthropic.com/en/docs/claude-code/) documentation. It is updated automatically._\n\n';
-  readmeContent += `**Last updated:** ${new Date().toUTCString()}\n\n---\n\n`;
+  readmeContent += `**Last updated:** ${new Date().toUTCString()}\n\n`;
+  readmeContent += '<details>\n';
+  readmeContent += '<summary><strong>🔔 Stay Updated (Get Notified of Changes)</strong></summary>\n\n';
+  readmeContent += '> **1. GitHub Releases (Recommended)**\n';
+  readmeContent += '> Click the `Watch` button at the top-right of this page, then select `Custom` > `Releases`. You will receive a notification from GitHub whenever a new version is published.\n\n';
+  readmeContent += '> **2. Telegram Channel**\n';
+  readmeContent += '> Join our public Telegram channel for instant notifications.\n';
+  readmeContent += `> **➡️ [Subscribe on Telegram](${TELEGRAM_PUBLIC_CHANNEL_URL})**\n`;
+  readmeContent += '</details>\n\n';
+  readmeContent += '---\n\n';
 
   for (const category of navStructure) {
     readmeContent += `## ${category.title}\n\n`;

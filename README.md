@@ -2,7 +2,18 @@
 
 _This repository is a mirror of the official [Claude Code](https://docs.anthropic.com/en/docs/claude-code/) documentation. It is updated automatically._
 
-**Last updated:** Thu, 14 Aug 2025 21:21:05 GMT
+**Last updated:** Fri, 15 Aug 2025 07:32:48 GMT
+
+<details>
+<summary><strong>🔔 Stay Updated (Get Notified of Changes)</strong></summary>
+
+> **1. GitHub Releases (Recommended)**
+> Click the `Watch` button at the top-right of this page, then select `Custom` > `Releases`. You will receive a notification from GitHub whenever a new version is published.
+
+> **2. Telegram Channel**
+> Join our public Telegram channel for instant notifications.
+> **➡️ [Subscribe on Telegram](https://t.me/+KFW99jUnwOA1ODA8)**
+</details>
 
 ---
 

@@ -7,6 +7,7 @@ on:
 
 jobs:
   update-and-publish:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -55,13 +56,26 @@ jobs:
           echo "version_number=${NEW_VERSION}" >> $GITHUB_OUTPUT
 
       - name: Generate Changelog
+        id: changelog_generator
         if: steps.git_status.outputs.has_changes == 'true'
         run: |
           NEW_VERSION="${{ steps.version.outputs.version_number }}"
-          CHANGELOG_HEADER="## 🤖 v${NEW_VERSION} - $(date +'%d-%m-%Y')"
+          CHANGELOG_HEADER="## 🤖 v${NEW_VERSION} - $(date +'%d/%m/%Y')"
           echo -e "$CHANGELOG_HEADER" > new_entry.tmp
-          GIT_CHANGES=$(git status --porcelain docs/ README.md)
-          echo -e "\n- File Changes:\n\`\`\`\n$GIT_CHANGES\n\`\`\`" >> new_entry.tmp
+          echo -e "\nFile Changes:\n" >> new_entry.tmp
+
+          git status --porcelain docs/ README.md | while IFS= read -r line; do
+            case "$line" in
+              " M "*) echo "- Modified: \`${line:3}\`" >> new_entry.tmp ;;
+              " D "*) echo "- Deleted: \`${line:3}\`" >> new_entry.tmp ;;
+              "?? "*) echo "- Added: \`${line:3}\`" >> new_entry.tmp ;;
+            esac
+          done
+
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          cat new_entry.tmp >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
           tail -n +2 CHANGELOG.md 2>/dev/null > old_body.tmp
           {
             echo "# Changelog";
@@ -70,6 +84,7 @@ jobs:
             echo "";
             cat old_body.tmp;
           } > CHANGELOG.md
+
           rm new_entry.tmp old_body.tmp
 
       - name: Commit, Tag, and Push
@@ -78,7 +93,28 @@ jobs:
           git add docs/ README.md CHANGELOG.md package.json package-lock.json
 
           git commit -m "docs: release v${{ steps.version.outputs.version_number }}"
-          git tag "v${{ steps.version.outputs.version_number }}"
+          git tag "${{ steps.version.outputs.version_number }}"
 
           git push
           git push --tags
+
+      - name: Create GitHub Release
+        if: steps.git_status.outputs.has_changes == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "${{ steps.version.outputs.version_number }}"
+          name: "${{ steps.version.outputs.version_number }}"
+          body: ${{ steps.changelog_generator.outputs.body }}
+
+      - name: Send Telegram Notification
+        if: steps.git_status.outputs.has_changes == 'true'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: markdown
+          message: |
+            🤖 New Claude Code docs update! **v${{ steps.version.outputs.version_number }}** has just been released.
+
+            Check out the changes here:
+            ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.version.outputs.version_number }}
