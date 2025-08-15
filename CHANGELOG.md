@@ -1,5 +1,13 @@
 # Changelog
 
+## 🤖 v1.1.1 - 15/08/2025
+
+File Changes:
+
+- Modified: `README.md`
+- Modified: `docs/resources/legal-and-compliance.md`
+
+
 ## 🧑‍💻 v1.1.0 - 15/08/2025
 
 - fix: changelog generation format to make it more readable
